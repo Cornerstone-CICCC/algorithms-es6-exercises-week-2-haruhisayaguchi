@@ -23,7 +23,40 @@ Penny (1¢)
 */
 
 const calculateChange = function (total, cash) {
-  // Your code here
+  const countCoins = (change, dollar) => {
+    let count = 0;
+    while (change - dollar >= 0) {
+      count++;
+      change -= dollar;
+    }
+    return count;
+  }
+
+  const coins = {
+    twentyDollars: 2000,
+    tenDollars: 1000,
+    fiveDollars: 500,
+    twoDollars: 200,
+    oneDollars: 100,
+    quarter: 25,
+    dime: 10,
+    nickel: 5,
+    penny: 1
+  };
+  let change = cash - total;
+  let result = {};
+
+  for (const key in coins) {
+    const count = countCoins(change, coins[key]);
+    if (count) {
+      result = {
+        ...result,
+        [key]: count
+      }
+    }
+    change -= coins[key] * count;
+  }
+  return result;
 };
 
 console.log(calculateChange(1787, 2000)); // { twoDollar: 1, dime: 1, penny: 3 }

@@ -16,7 +16,62 @@ For more information on casing styles, read Wikipedia's Special Case Styles for 
 */
 
 const makeCaze = function (input, caze) {
-  // Put your solution here
+  // Normalize caze to array
+  let cases = Array.isArray(caze) ? caze : [caze];
+  // Precedence order
+  const precedence = [
+    "camel", "pascal", "snake", "kebab", "title",
+    "vowel", "consonant",
+    "upper", "lower"
+  ];
+  // Sort cases by precedence
+  cases = cases.slice().sort((a, b) => precedence.indexOf(a) - precedence.indexOf(b));
+
+  let result = input;
+
+  for (let style of cases) {
+    switch (style) {
+      case "camel":
+        result = result
+          .split(' ')
+          .map((w, i) => i === 0 ? w.toLowerCase() : w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+          .join('');
+        break;
+      case "pascal":
+        result = result
+          .split(' ')
+          .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+          .join('');
+        break;
+      case "snake":
+        result = result.split(' ').join('_');
+        break;
+      case "kebab":
+        result = result.split(' ').join('-');
+        break;
+      case "title":
+        result = result
+          .split(' ')
+          .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+          .join(' ');
+        break;
+      case "vowel":
+        result = result.replace(/[aeiou]/gi, c => c.toUpperCase());
+        break;
+      case "consonant":
+        result = result.replace(/[^aeiou\s]/gi, c => c.toUpperCase());
+        break;
+      case "upper":
+        result = result.toUpperCase();
+        break;
+      case "lower":
+        result = result.toLowerCase();
+        break;
+      default:
+        break;
+    }
+  }
+  return result;
 };
 
 console.log(makeCaze("this is a string", "camel")); // thisIsAString

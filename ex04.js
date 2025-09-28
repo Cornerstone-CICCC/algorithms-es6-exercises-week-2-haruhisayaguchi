@@ -6,7 +6,8 @@ Create a function named instructorWithLongestName that will receive an array of 
 */
 
 const instructorWithLongestName = function (instructors) {
-  // Put your solution here
+  instructors.sort((a, b) => b.name.length - a.name.length)
+  return instructors[0]
 };
 
 console.log(

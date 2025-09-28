@@ -23,7 +23,23 @@ Create a function named squareCode that will receive a message, and return the s
 */
 
 const squareCode = function (message) {
-  // Put your solution here
+  message = message.replace(/ /g, '');
+  const length = Math.ceil(Math.sqrt(message.length));
+  let squareMessage = [];
+  let messageArray = message.split('');
+  while (messageArray.length > 0) {
+    squareMessage.push(messageArray.slice(0, length));
+    messageArray = messageArray.slice(length);
+  }
+  let result = [];
+  for (let i = 0; i < length; i++) {
+    let code = '';
+    for (let j = 0; j < length; j++) {
+      code += squareMessage[j] ? squareMessage[j][i] ?? '' : '';
+    }
+    result.push(code);
+  }
+  return result.join(' ');
 };
 
 console.log(squareCode("chill out")); // clu hlt io

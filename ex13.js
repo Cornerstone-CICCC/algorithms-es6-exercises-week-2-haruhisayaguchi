@@ -9,7 +9,34 @@ Create a function named talkingCalendar that takes in a date string with the for
 */
 
 const talkingCalendar = function (date) {
-  // Your code here
+  const months = {
+    '01': 'January',
+    '02': 'Feburary',
+    '03': 'March',
+    '04': 'April',
+    '05': 'May',
+    '06': 'June',
+    '07': 'July',
+    '08': 'August',
+    '09': 'September',
+    '10': 'October',
+    '11': 'November',
+    '12': 'December'
+  }
+  const days = {
+    '01': '1st',
+    '02': '2nd',
+    '03': '3rd',
+    '21': '21st',
+    '22': '22nd',
+    '23': '23rd',
+    '31': '31st'
+  }
+  const formattedMonth = monthStr => months[monthStr];
+  const formattedDay = dayStr => days[dayStr] ?? dayStr + 'th';
+
+  const dateArray = date.split('/');
+  return `${formattedMonth(dateArray[1])} ${formattedDay(dateArray[2])}, ${dateArray[0]}`;
 };
 
 console.log(talkingCalendar("2017/12/02")); // December 2nd, 2017

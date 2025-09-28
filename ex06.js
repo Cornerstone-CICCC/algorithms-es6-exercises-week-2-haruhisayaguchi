@@ -19,8 +19,22 @@ Note
 Note: There may be multiple available spots for a particular vehicle. It does not matter which spot your function chooses, as long as the spot is available. And if there are no available spots, remember to return false.
 */
 
+const availableSpots = {
+  regular: ["R"],
+  small: ["R", "S"],
+  motorcycle: ["R", "S", "M"]
+}
+
 const whereCanIPark = function (spots, vehicle) {
-  // Code here!
+  for (let y = 0; y < spots.length; y++) {
+    const rows = spots[y];
+    for (let x = 0; x < rows.length; x++) {
+      if (availableSpots[vehicle].includes(rows[x])) {
+        return [x, y];
+      }
+    }
+  }
+  return false;
 };
 
 console.log(
